@@ -1,24 +1,29 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import Footer from '@/Components/Guest/Footer.vue';
 import { Link } from '@inertiajs/vue3';
 
 </script>
 
 <template>
-    <div
-        class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0"
-    >
-        <div>
-            <Link href="/login">Logar</Link>
-            <Link href="/">
-                <ApplicationLogo class="h-20 w-20 fill-current text-gray-500" />
+    <body class="flex flex-col justify-between max-w-7xl mx-auto min-h-screen px-6 sm:px-0">
+        <main>
+            <Link
+                v-if="route().current('login') || route().current('register')"
+                href="/"
+            >
+                <img src="/images/arrow-left.svg" class="h-10 w-10 mt-12" />
             </Link>
-        </div>
-
-        <div
-            class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg"
-        >
-            <slot />
-        </div>
-    </div>
+            <div class="flex flex-col items-center pt-6">
+                <div>
+                    <img src="/images/melograno.svg" class="w-[420px]" />
+                </div>
+            </div>
+            <div
+                class="mx-auto mt-12 w-full sm:max-w-md"
+            >
+                <slot />
+            </div>
+        </main>
+    </body>
+    <Footer />
 </template>
