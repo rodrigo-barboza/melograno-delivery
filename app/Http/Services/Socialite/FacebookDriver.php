@@ -7,7 +7,7 @@ use App\Enums\SocialDriverEnum;
 use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;
 
-class GoogleDriver implements SocialiteDriver
+class FacebookDriver implements SocialiteDriver
 {
     public SocialiteService $socialite {
         get => new SocialiteService();
@@ -15,7 +15,7 @@ class GoogleDriver implements SocialiteDriver
 
     public function getDriver(): string
     {
-        return SocialDriverEnum::GOOGLE->value;
+        return SocialDriverEnum::FACEBOOK->value;
     }
 
     public function redirect(): RedirectResponse
