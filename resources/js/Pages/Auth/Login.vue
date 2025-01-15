@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import GuestLightLayout from '@/Layouts/GuestLightLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import FormTitle from '@/Components/Guest/FormTitle.vue';
 import LoginForm from '@/Pages/Auth/LoginForm.vue';
@@ -26,7 +26,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLightLayout>
         <Head title="Log in" />
 
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
@@ -40,5 +40,5 @@ const submit = () => {
             :can-reset-password="canResetPassword"
             @submit="submit"
         />
-    </GuestLayout>
+    </GuestLightLayout>
 </template>

@@ -1,17 +1,19 @@
 
 <template>
     <Head title="Deu fome? Melograno" />
+
     <GuestLayout>
-        <div class="">
-            <a href="/teste">Navegar</a>
+        <CategoriesSection />
+        <div>
             Oii
         </div>
     </GuestLayout>
 </template>
 
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
+import CategoriesSection from '@/Pages/Components/CategoriesSection.vue';
+import { Head } from '@inertiajs/vue3';
 
 defineProps({
     canLogin: {
