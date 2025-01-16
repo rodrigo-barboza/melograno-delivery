@@ -60,6 +60,9 @@ onMounted(() => {
     drawer.value = new Drawer(drawerElement.value, {
         placement: 'right',
         backdropClasses: 'bg-black/30 fixed inset-0 z-30',
+        onHide: () => {
+            emit('update:model-value', false);
+        },
     });
 });
 

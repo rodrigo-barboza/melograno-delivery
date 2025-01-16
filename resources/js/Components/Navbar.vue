@@ -177,8 +177,8 @@ const showCart = ref(false);
                         </template>
                     </Dropdown>
                 </div>
-                <button
-                    class="inline-flex items-center"
+                <div
+                    class="inline-flex items-center cursor-pointer"
                     @click="showCart = true"
                 >
                     <img src="/icons/cart.svg" class="h-6">
@@ -187,7 +187,7 @@ const showCart = ref(false);
                     >
                         3
                     </span>
-                </button>
+                </div>
             </div>
         </div>
         <CartSidesheet v-model="showCart" />
