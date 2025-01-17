@@ -26,7 +26,7 @@ defineProps({
         @click="emit('on-click', id)"
     >
         <img
-            class="mt-1 w-[250px] rounded-xl object-cover hover:filter hover:saturate-150"
+            class="mt-1 w-[250px] h-[180px] rounded-xl object-cover hover:filter hover:saturate-150"
             :src="image"
         >
         <div class="text-center text-[#1E1E1E] text-lg font-medium">

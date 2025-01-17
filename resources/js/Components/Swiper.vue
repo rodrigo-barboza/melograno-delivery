@@ -1,6 +1,6 @@
 <template>
     <swiper
-        class="h-[180px] sm:h-[250px]"
+        class="h-[240px] sm:h-[250px]"
         :modules="modules"
         :slides-per-view="slidesPerView"
         :space-between="10"

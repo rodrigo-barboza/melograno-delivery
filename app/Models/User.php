@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use App\Enums\SocialDriverEnum;
+use App\Models\Traits\TitleableName;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, TitleableName;
 
     protected $fillable = [
         'name',
@@ -41,5 +43,10 @@ class User extends Authenticatable
             set: fn(string $value): string => $value
                 ?: 'https://avatar.oxro.io/avatar.svg?name='. ucwords($this->name),
         );
+    }
+
+    public function establishments(): HasOne
+    {
+        return $this->hasOne(Establishment::class);
     }
 }

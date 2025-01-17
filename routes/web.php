@@ -1,17 +1,17 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EstablishmentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Index', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-})->name('home');
+Route::get('/', [HomeController::class,'index'])->name('home');
 
-Route::get('/establishments', fn() => dd('olar'))->name('establishments');
+Route::resource('establishments', EstablishmentController::class)->only(['index']);
+
+Route::get('categories/{categories:slug}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

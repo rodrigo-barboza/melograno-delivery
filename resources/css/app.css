@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --toastify-color-progress-light: #ff0000;
+}
 
 body {
     font-family: 'Lato', sans-serif;

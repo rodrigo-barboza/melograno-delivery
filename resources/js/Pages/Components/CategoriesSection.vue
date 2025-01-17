@@ -6,53 +6,24 @@ import { SwiperSlide } from 'swiper/vue';
 defineProps({
     categories: {
         type: Array,
-        default: () => ([
-            {
-                name: 'Hamburguesas',
-                image: '/images/hamburger.webp',
-            },
-            {
-                name: 'Pizzas',
-                image: '/images/hamburger.webp',
-            },
-            {
-                name: 'Hamburguesas',
-                image: '/images/hamburger.webp',
-            },
-            {
-                name: 'Hamburguesas',
-                image: '/images/hamburger.webp',
-            },
-            {
-                name: 'Pizzas',
-                image: '/images/hamburger.webp',
-            },
-            {
-                name: 'Hamburguesas',
-                image: '/images/hamburger.webp',
-            },
-            {
-                name: 'Hamburguesas',
-                image: '/images/hamburger.webp',
-            },
-        ]),
+        default: () => ([]),
     },
 });
 
 </script>
 
 <template>
-    <div class="">
+    <div>
         <Swiper>
             <SwiperSlide
-                v-for="{ id, name, image } in categories"
+                v-for="{ id, name, slug, cover } in categories"
                 :key="id"
             >
                 <CategoryCard
                     :id="id"
                     :name="name"
-                    :image="image"
-                    @on-click="console.log('opa')"
+                    :image="cover"
+                    @on-click="console.log(slug)"
                 />
             </SwiperSlide>
         </Swiper>

@@ -10,7 +10,7 @@ const showCart = ref(false);
 </script>
 
 <template>
-    <nav class="bg-white border-gray-200 border-b border-[rgba(0,0,0,0.14)]">
+    <nav class="relative bg-white border-gray-200 border-b border-[rgba(0,0,0,0.14)]">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 py-6">
             <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="/images/melograno-inline.svg" class="h-12" />
@@ -53,9 +53,9 @@ const showCart = ref(false);
                     </li>
                     <li>
                         <Link
-                            :href="route('establishments')"
+                            :href="route('establishments.index')"
                             class="block py-2 px-3 rounded md:bg-transparent md:p-0 hover:text-[#F34444]"
-                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments') }"
+                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments.index') }"
                         >
                             Restaurantes
                         </Link>
