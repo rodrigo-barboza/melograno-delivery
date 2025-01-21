@@ -6,6 +6,11 @@ defineProps({
         type: String,
         default: '',
     },
+
+    dishes: {
+        type: Array,
+        default: () => ([]),
+    },
 });
 
 </script>
@@ -16,13 +21,18 @@ defineProps({
             {{ sectionTitle }}
         </div>
         <div class="mt-4 grid grid-cols-2 gap-4">
-            <DishCard class="mt-4" />
-            <DishCard class="mt-4" />
-            <DishCard class="mt-4" />
-            <DishCard class="mt-4" />
-            <DishCard class="mt-4" />
-            <DishCard class="mt-4" />
-            <DishCard class="mt-4" />
+            <template v-if="dishes.length === 0">
+                Nenhum item encontrado nesta categoria
+            </template>
+            <template v-else>
+                <DishCard
+                    v-for="(dish, index) in dishes"
+                    v-bind="dish"
+                    :key="index"
+                    class="mt-4"
+                    @on-click="$emit('on-click', dish)"
+                />
+            </template>
         </div>
     </div>
 </template>

@@ -1,8 +1,10 @@
 <script setup>
 import SearchMenu from '@/Pages/Establishment/Partials/SearchMenu.vue';
 import MenuList from '@/Pages/Establishment/Partials/MenuList.vue';
+import { computed, ref } from 'vue';
+import EmptyState from '@/Components/EmptyState.vue';
 
-defineProps({
+const props = defineProps({
     deliveryAverageTime: {
         type: String,
         default: '',
@@ -10,9 +12,24 @@ defineProps({
 
     dishes: {
         type: Array,
-        default: [],
+        default: () => ([]),
     },
 });
+
+const internalDishes = ref(props.dishes);
+const searchValue = ref('');
+
+const menu = computed(() => ({
+    drinks: internalDishes.value.filter((dish) => dish.category.slug === 'drinks'),
+    foods: internalDishes.value.filter((dish) => dish.category.slug !== 'drinks'),
+}));
+
+const onSearchByName = (value) => {
+    searchValue.value = value.toLowerCase();
+    internalDishes.value = props.dishes.filter(
+        (dish) => dish.name.toLowerCase().includes(searchValue.value),
+    );
+};
 
 </script>
 
@@ -20,17 +37,28 @@ defineProps({
     <div>
         <SearchMenu
             :delivery-average-time="deliveryAverageTime"
-            @search="console.log($event)"
+            @search="onSearchByName"
         />
         <div class="mt-12 flex flex-col gap-12">
-            <MenuList
-                section-title="Comidas"
-                :dishes="[]"
+            <EmptyState
+                v-if="internalDishes.length === 0 && !searchValue"
+                title="Nenhum item cadastrado"
+                subtitle="Não foram encontrados pratos para este estabelecimento"
+                image-src="/images/empty-menu.png"
+                margin-title="mt-0 mb-4"
             />
-            <MenuList
-                section-title="Bebidas"
-                :dishes="[]"
-            />
+            <template v-else>
+                <MenuList
+                    section-title="Comidas"
+                    :dishes="menu.foods"
+                    @on-click="$emit('on-dish-click', $event)"
+                />
+                <MenuList
+                    section-title="Bebidas"
+                    :dishes="menu.drinks"
+                    @on-click="$emit('on-dish-click', $event)"
+                />
+            </template>
         </div>
     </div>
 </template>

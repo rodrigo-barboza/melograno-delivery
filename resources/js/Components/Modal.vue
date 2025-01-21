@@ -55,8 +55,6 @@ const close = () => {
 const closeOnEscape = (e) => {
     if (e.key === 'Escape') {
         e.preventDefault();
-        console.log('asdjasd')
-
         close();
     }
 };

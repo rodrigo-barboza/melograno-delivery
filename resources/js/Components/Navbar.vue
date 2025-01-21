@@ -190,6 +190,8 @@ const showCart = ref(false);
                 </div>
             </div>
         </div>
-        <CartSidesheet v-model="showCart" />
+        <CartSidesheet
+            v-model="showCart"
+        />
     </nav>
 </template>

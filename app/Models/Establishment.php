@@ -44,4 +44,9 @@ class Establishment extends Model
     {
         return $this->hasMany(OperatingHour::class);
     }
+
+    public function dishes(): HasMany
+    {
+        return $this->hasMany(Dish::class);
+    }
 }

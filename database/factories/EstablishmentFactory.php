@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Dish;
 use App\Models\Establishment;
 use App\Models\EstablishmentCategory;
 use App\Models\OperatingHour;
@@ -21,7 +22,7 @@ class EstablishmentFactory extends Factory
             'address' => $this->faker->streetAddress,
             'image' => '/images/placeholder-b.png',
             'cover' => $this->faker->randomElement([asset('/images/placeholder-a.svg'), asset('/images/placeholder-b.svg')]),
-            'minimum_order_value' => $this->faker->numberBetween(1000, 10000),
+            'minimum_order_value' => $this->faker->numberBetween(10, 100),
             'rate' => $this->faker->randomFloat(2, 0, 5),
             'user_id' => User::factory()->create()->id,
             'delivery_average_time_min' => $this->faker->numberBetween(10, 30),
@@ -52,6 +53,17 @@ class EstablishmentFactory extends Factory
         return $this->afterCreating(function (Establishment $establishment): void {
             $category = EstablishmentCategory::factory()->create();
             $establishment->categories()->attach($category->id);
+        });
+    }
+
+    public function withDishes(int $count = 1): Factory
+    {
+        return $this->afterCreating(function (Establishment $establishment) use ($count): void {
+            $establishment->dishes()->saveMany(
+                Dish::factory($count)->create([
+                    'establishment_id' => $establishment->id,
+                ]),
+            );
         });
     }
 }

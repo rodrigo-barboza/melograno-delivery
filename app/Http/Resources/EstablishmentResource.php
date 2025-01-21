@@ -23,6 +23,7 @@ class EstablishmentResource extends JsonResource
             'operatingHour' => $this->operatingHour ?? null,
             'category' => collect($this->categories)->first() ?? null,
             'deliveryAverageTime' => "$this->delivery_average_time_min - {$this->delivery_average_time_max}min",
+            'dishes' => $this->whenLoaded('dishes', DishResource::collection($this->dishes)),
         ];
     }
 }

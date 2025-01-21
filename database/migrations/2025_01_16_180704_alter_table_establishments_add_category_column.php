@@ -12,6 +12,7 @@ return new class extends Migration
             $table->string('category_id')->nullable();
             $table->string('delivery_average_time_min')->nullable();
             $table->string('delivery_average_time_max')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

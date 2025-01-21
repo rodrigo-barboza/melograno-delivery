@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DishesCategoriesEnum;
 use App\Http\Resources\EstablishmentCollection;
 use App\Http\Resources\EstablishmentResource;
 use App\Models\Establishment;
@@ -14,10 +15,7 @@ class EstablishmentController extends Controller
     public function index(): ResourceCollection
     {
         return EstablishmentResource::collection(
-            Establishment::with([
-                'operatingHour' => fn($query) => $query->orderBy('day_of_week'),
-                'categories',
-            ])->paginate(15),
+            Establishment::with(['categories'])->paginate(15),
         );
     }
 
@@ -25,6 +23,7 @@ class EstablishmentController extends Controller
     {
         $establishment->load([
             'operatingHour' => fn($query) => $query->orderBy('day_of_week'),
+            'dishes' => fn($query) => $query->with('category'),
             'categories',
         ]);
 

@@ -9,6 +9,12 @@ class EstablishmentSeeder extends Seeder
 {
     public function run(): void
     {
-        Establishment::factory()->count(50)->withResponsible()->withCategory()->withOperatingHours()->create();
+        Establishment::factory()
+            ->count(50)
+            ->withResponsible()
+            ->withCategory()
+            ->withOperatingHours()
+            ->withDishes(15)
+            ->create();
     }
 }
