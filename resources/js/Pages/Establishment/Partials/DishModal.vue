@@ -39,7 +39,7 @@ const form = useForm({
 const totalPrice = computed(() => toCurrency(props.dish.price * form.quantity));
 
 const storeOnLocalStorage = () => {
-    LocalStorage.set(props.dish.id, form.data());
+    LocalStorage.set(`cart-${props.dish.id}`, form.data());
 };
 
 const storeOnBackend = () => {

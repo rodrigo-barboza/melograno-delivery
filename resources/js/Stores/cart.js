@@ -24,8 +24,12 @@ export const useCartStore = defineStore('cart', () => {
     };
 
     const fetchCartItemsFromLocalStorage = () => {
-        cartItems.value = LocalStorage.keys().map((key) => LocalStorage.get(key));
-    }
+        LocalStorage.keys().forEach((key) => {
+            if (key.includes('cart')) {
+                cartItems.value.push(LocalStorage.get(key))
+            };
+        });
+    };
 
     return {
         cartItems,
