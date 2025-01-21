@@ -7,8 +7,8 @@ const showCart = defineModel({
     default: false
 });
 
-const props = defineProps({
-    items: {
+defineProps({
+    cartItems: {
         type: Array,
         default: () => ([]),
     },
@@ -19,10 +19,10 @@ const props = defineProps({
 <template>
     <Sidesheet
         v-model="showCart"
-        :title="!!items.length ? 'Carrinho' : ''"
+        :title="!!cartItems.length ? 'Carrinho' : ''"
     >
         <div
-            v-if="!items.length"
+            v-if="!cartItems.length"
             class="flex flex-col justify-center items-center h-full gap-3"
         >
             <EmptyState
@@ -30,6 +30,9 @@ const props = defineProps({
                 subtitle="Adicione itens ao seu carrinho"
                 image-src="/images/empty-cart.svg"
             />
+        </div>
+        <div v-else>
+            {{ cartItems }}
         </div>
     </Sidesheet>
 </template>

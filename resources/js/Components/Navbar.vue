@@ -2,14 +2,22 @@
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import CartSidesheet from '@/Components/CartSidesheet.vue';
+import { useCartStore } from '@/Stores/cart';
 import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+const store = useCartStore();
 
 const showCart = ref(false);
+
+const fetchCartItems = () => store.getCartItems();
+
+onMounted(fetchCartItems);
 
 </script>
 
 <template>
+    {{ cartItems }}
     <nav class="relative bg-white border-gray-200 border-b border-[rgba(0,0,0,0.14)]">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 py-6">
             <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -185,13 +193,14 @@ const showCart = ref(false);
                     <span
                         class="inline-flex items-center justify-center w-4 h-4 mt-3 ms-[-9px] text-xs font-semibold text-white bg-[#F34444] rounded-full"
                     >
-                        3
+                        {{ store.cartItems.length }}
                     </span>
                 </div>
             </div>
         </div>
         <CartSidesheet
             v-model="showCart"
+            :cart-items="store.cartItems"
         />
     </nav>
 </template>

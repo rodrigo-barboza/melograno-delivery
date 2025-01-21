@@ -5,14 +5,17 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Modal from '@/Components/Modal.vue';
 import DishForm from '@/Pages/Establishment/Partials/DishForm.vue';
 import LocalStorage from '@/Services/localStorage';
-import { computed, useAttrs } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { useCartStore } from '@/Stores/cart';
+import { computed } from 'vue';
+import { useForm, usePage } from '@inertiajs/vue3';
+import axios from 'axios';
 
 const emit = defineEmits(['update:model-value']);
 
 const { toCurrency } = useCurrency();
 
-const attrs = useAttrs();
+const store = useCartStore();
+const page = usePage();
 const toast = useToast();
 
 const show = defineModel({
@@ -28,7 +31,7 @@ const props = defineProps({
 });
 
 const form = useForm({
-    dishId: null,
+    dish_id: null,
     quantity: 1,
     comment: '',
 });
@@ -43,15 +46,18 @@ const storeOnBackend = () => {
     return axios.post('/carts', form.data());
 };
 
-const resolveStoreAction = async () => (attrs.auth?.user ? storeOnBackend : storeOnLocalStorage);
+const resolveStoreAction = async () => (page.props.auth?.user ? storeOnBackend() : storeOnLocalStorage());
+
+const closeModal = () => (emit('update:model-value', false), form.reset());
 
 const submit = async () => {
-    form.dishId = props.dish.id;
+    form.dish_id = props.dish.id;
 
     try {
         await resolveStoreAction();
         toast.success('Produto adicionado ao carrinho');
-        emit('update:model-value', false);
+        store.getCartItems();
+        closeModal();
     } catch (error) {
         toast.error('Ocorreu um erro ao adicionar o produto ao carrinho.');
     }
@@ -60,7 +66,10 @@ const submit = async () => {
 </script>
 
 <template>
-    <Modal :show="show">
+    <Modal
+        :show="show"
+        @close="closeModal"
+    >
         <div class="flex gap-4 w-full">
             <img
                 class="max-w-[300px] min-h-[350px] object-cover rounded-md border border-[#e3e3e3]"
