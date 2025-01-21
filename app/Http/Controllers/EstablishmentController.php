@@ -3,17 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\EstablishmentCollection;
+use App\Http\Resources\EstablishmentResource;
 use App\Models\Establishment;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class EstablishmentController extends Controller
 {
-    public function index(): EstablishmentCollection
+    public function index(): ResourceCollection
     {
-        return EstablishmentCollection::make(
+        return EstablishmentResource::collection(
             Establishment::with([
                 'operatingHour' => fn($query) => $query->orderBy('day_of_week'),
                 'categories',
             ])->paginate(15),
         );
+    }
+
+    public function show(Establishment $establishment): Response
+    {
+        $establishment->load([
+            'operatingHour' => fn($query) => $query->orderBy('day_of_week'),
+            'categories',
+        ]);
+
+        return Inertia::render('Establishment/Show', [
+            'establishment' => EstablishmentResource::make($establishment),
+        ]);
     }
 }

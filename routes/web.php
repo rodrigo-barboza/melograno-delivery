@@ -9,7 +9,7 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class,'index'])->name('home');
 
-Route::resource('establishments', EstablishmentController::class)->only(['index']);
+Route::resource('establishments', EstablishmentController::class)->only(['index', 'show']);
 
 Route::get('categories/{categories:slug}', [CategoryController::class, 'show'])->name('categories.show');
 

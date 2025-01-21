@@ -2,6 +2,11 @@
 import EstablishmentCardSkeleton from '@/Pages/Components/EstablishmentCardSkeleton.vue';
 
 defineProps({
+    id: {
+        type: String,
+        default: '',
+    },
+
     name: {
         type: String,
         default: '',
@@ -37,8 +42,9 @@ defineProps({
 
 <template>
     <EstablishmentCardSkeleton v-if="loading" />
-    <div
+    <a
         v-else
+        :href="route('establishments.show', id)"
         class="flex gap-4 text-[#1E1E1E] rounded-xl border border-[#F2F2F2] p-4 cursor-pointer hover:bg-[#F2F2F2]"
     >
         <img
@@ -60,5 +66,5 @@ defineProps({
                 </span>
             </div>
         </div>
-    </div>
+    </a>
 </template>

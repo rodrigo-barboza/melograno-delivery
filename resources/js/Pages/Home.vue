@@ -2,7 +2,7 @@
 <script setup>
 import CategoriesSection from '@/Pages/Components/CategoriesSection.vue';
 import EstablishmentsSection from '@/Pages/Components/EstablishmentsSection.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import MainLayout from '@/Layouts/MainLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Head } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
@@ -40,7 +40,7 @@ const fetchEstablishments = async () => {
 
     try {
         const { data } = await axios.get(`/establishments?page=${currentPage.value}`);
-        establishments.value.push(...data.establishments);
+        establishments.value.push(...data.data);
         pagination.value = data.meta;
     } catch (error) {
         toast.error('Ocorreu um erro ao carregar os estabelecimentos');
@@ -64,7 +64,7 @@ onMounted(fetchEstablishments);
 
 <template>
     <Head title="Deu fome? Melograno" />
-    <GuestLayout>
+    <MainLayout>
         <div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
             <div class="text-[#1E1E1E] font-bold text-2xl mb-6">Categorias</div>
         </div>
@@ -89,5 +89,5 @@ onMounted(fetchEstablishments);
                 </PrimaryButton>
             </div>
         </template>
-    </GuestLayout>
+    </MainLayout>
 </template>
