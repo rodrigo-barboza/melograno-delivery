@@ -1,22 +1,16 @@
 <script setup>
-import useCurrency from '@/Composables/useCurrency';
-import useToast from '@/Composables/useToast';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import Modal from '@/Components/Modal.vue';
-import DishForm from '@/Pages/Establishment/Partials/DishForm.vue';
-import LocalStorage from '@/Services/localStorage';
-import { useCartStore } from '@/Stores/cart';
 import { computed } from 'vue';
-import { useForm, usePage } from '@inertiajs/vue3';
-import axios from 'axios';
+import { useForm } from '@inertiajs/vue3';
+import DishForm from '@/Pages/Establishment/Partials/DishForm.vue';
+import Modal from '@/Components/Modal.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import useCart from '@/Composables/useCart';
+import useCurrency from '@/Composables/useCurrency';
 
 const emit = defineEmits(['update:model-value']);
 
+const { addDishToCart } = useCart();
 const { toCurrency } = useCurrency();
-
-const store = useCartStore();
-const page = usePage();
-const toast = useToast();
 
 const show = defineModel({
     type: Boolean,
@@ -32,35 +26,21 @@ const props = defineProps({
 
 const form = useForm({
     dish_id: null,
+    dish: null,
     quantity: 1,
     comment: '',
 });
 
 const totalPrice = computed(() => toCurrency(props.dish.price * form.quantity));
 
-const storeOnLocalStorage = () => {
-    LocalStorage.set(`cart-${props.dish.id}`, form.data());
-};
-
-const storeOnBackend = () => {
-    return axios.post('/carts', form.data());
-};
-
-const resolveStoreAction = async () => (page.props.auth?.user ? storeOnBackend() : storeOnLocalStorage());
-
 const closeModal = () => (emit('update:model-value', false), form.reset());
 
-const submit = async () => {
+const onSubmit = async () => {
     form.dish_id = props.dish.id;
+    form.dish = props.dish;
 
-    try {
-        await resolveStoreAction();
-        toast.success('Produto adicionado ao carrinho');
-        store.getCartItems();
-        closeModal();
-    } catch (error) {
-        toast.error('Ocorreu um erro ao adicionar o produto ao carrinho.');
-    }
+    await addDishToCart(form.data());
+    closeModal();
 };
 
 </script>
@@ -91,7 +71,7 @@ const submit = async () => {
                 </div>
                 <PrimaryButton
                     class="mt-4 flex font-medium justify-between"
-                    @click="submit"
+                    @click="onSubmit"
                 >
                     Adicionar <span>{{ totalPrice }}</span>
                 </PrimaryButton>

@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Home', [
+        return Inertia::render('Index', [
             'categories' => CategoryCollection::make(Category::all()),
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),

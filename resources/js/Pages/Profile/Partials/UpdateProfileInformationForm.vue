@@ -3,7 +3,10 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
+import useAuth from '@/Composables/useAuth';
+import { Link, useForm } from '@inertiajs/vue3';
+
+const { user } = useAuth();
 
 defineProps({
     mustVerifyEmail: {
@@ -14,12 +17,11 @@ defineProps({
     },
 });
 
-const user = usePage().props.auth.user;
-
 const form = useForm({
     name: user.name,
     email: user.email,
 });
+
 </script>
 
 <template>

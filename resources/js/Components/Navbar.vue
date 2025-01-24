@@ -1,23 +1,27 @@
 <script setup>
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import CartSidesheet from '@/Components/CartSidesheet.vue';
-import { useCartStore } from '@/Stores/cart';
 import { Link } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
+import { useCartStore } from '@/Stores/cart';
+import AddressModal from '@/Pages/Components/AddressModal.vue';
+import CartSidesheet from '@/Components/CartSidesheet.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
 
 const store = useCartStore();
 
 const showCart = ref(false);
+const showAddressModal = ref(false);
 
 const fetchCartItems = () => store.getCartItems();
 
-onMounted(fetchCartItems);
+onMounted(() => {
+    window.Echo.channel('cart').listen('.cart.updated', () => setTimeout(() => fetchCartItems(), 1000));
+    setTimeout(() => fetchCartItems(), 1000);
+});
 
 </script>
 
 <template>
-    {{ cartItems }}
     <nav class="relative bg-white border-gray-200 border-b border-[rgba(0,0,0,0.14)]">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 py-6">
             <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -52,9 +56,9 @@ onMounted(fetchCartItems);
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                     <li>
                         <Link
-                            :href="route('home')"
+                            :href="route('index')"
                             class="block py-2 px-3 rounded md:bg-transparent md:p-0 hover:text-[#F34444]"
-                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('home') }"
+                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('index') }"
                         >
                             Home
                         </Link>
@@ -159,7 +163,7 @@ onMounted(fetchCartItems);
                                 <img src="/icons/user.svg" class="h-6">
                             </button>
                         </template>
-    
+
                         <template #content>
                             <template v-if="$page.props.auth.user">
                                 <DropdownLink
@@ -201,6 +205,8 @@ onMounted(fetchCartItems);
         <CartSidesheet
             v-model="showCart"
             :cart-items="store.cartItems"
+            @show-address-modal="showAddressModal = true"
         />
+        <AddressModal v-model="showAddressModal" />
     </nav>
 </template>

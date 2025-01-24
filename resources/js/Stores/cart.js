@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import LocalStorage from '@/Services/localStorage';
+import { ref } from 'vue';
 import axios from 'axios';
+import LocalStorage from '@/Services/localStorage';
+import useAuth from '@/Composables/useAuth';
 
-const page = usePage();
+const { isLoggedIn } = useAuth();
 
 export const useCartStore = defineStore('cart', () => {
     const cartItems = ref([]);
 
     const getCartItems = () => {
-        if (page.props.auth.user) {
+        if (isLoggedIn()) {
             fetchCartItemsFromBackend();
             return;
         }
@@ -19,15 +19,19 @@ export const useCartStore = defineStore('cart', () => {
     };
 
     const fetchCartItemsFromBackend = async () => {
+        cartItems.value = [];
+
         const { data } = await axios.get('/carts');
         cartItems.value = data.data;
     };
 
     const fetchCartItemsFromLocalStorage = () => {
+        cartItems.value = [];
+
         LocalStorage.keys().forEach((key) => {
             if (key.includes('cart')) {
-                cartItems.value.push(LocalStorage.get(key))
-            };
+                cartItems.value.push(LocalStorage.get(key));
+            }
         });
     };
 

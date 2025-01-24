@@ -1,7 +1,7 @@
 <script setup>
-import GuestLightLayout from '@/Layouts/GuestLightLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import FormTitle from '@/Components/Guest/FormTitle.vue';
+import GuestLightLayout from '@/Layouts/GuestLightLayout.vue';
 import LoginForm from '@/Pages/Auth/LoginForm.vue';
 
 defineProps({

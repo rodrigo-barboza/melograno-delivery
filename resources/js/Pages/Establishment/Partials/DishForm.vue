@@ -1,6 +1,9 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import PriceQuantityInput from '@/Components/PriceQuantityInput.vue';
+import useCurrency from '@/Composables/useCurrency';
+
+const { toCurrency } = useCurrency();
 
 const form = defineModel({
     type: Object,
@@ -18,10 +21,12 @@ defineProps({
 
 <template>
     <form @submit.prevent>
-        <PriceQuantityInput
-            v-model="form.quantity"
-            :dish-price="dish.price"
-        />
+        <div class="mt-4 flex justify-between">
+            <div class="text-[#5E6260] font-bold">
+                {{  toCurrency(dish.price) }}
+            </div>
+            <PriceQuantityInput v-model="form.quantity" />
+        </div>
         <!-- Tabela de adicionais será uma feature futura -->
         <InputLabel
             class="mt-4 mb-2"

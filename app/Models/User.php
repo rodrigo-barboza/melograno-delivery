@@ -46,7 +46,7 @@ class User extends Authenticatable
         );
     }
 
-    public function establishments(): HasOne
+    public function establishment(): HasOne
     {
         return $this->hasOne(Establishment::class);
     }
@@ -54,5 +54,10 @@ class User extends Authenticatable
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(Address::class);
     }
 }
