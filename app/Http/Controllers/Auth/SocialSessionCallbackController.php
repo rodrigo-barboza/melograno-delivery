@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Services\Socialite\SocialiteService;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;

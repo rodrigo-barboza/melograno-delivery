@@ -10,8 +10,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\SocialSessionCallbackController;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use App\Http\Controllers\Auth\SocialSessionCallbackController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('social/{provider}/login', AuthenticatedSocialSessionController::class)->name('social.login');

@@ -35,8 +35,19 @@ export const useCartStore = defineStore('cart', () => {
         });
     };
 
+    const cleanCartFromLocalStorage = () => {
+        LocalStorage.keys().forEach((key) => {
+            if (key.includes('cart')) {
+                LocalStorage.remove(key);
+            }
+        });
+
+        cartItems.value = [];
+    };
+
     return {
         cartItems,
         getCartItems,
+        cleanCartFromLocalStorage,
     };
 });
