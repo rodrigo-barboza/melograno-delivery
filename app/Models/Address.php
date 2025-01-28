@@ -25,6 +25,8 @@ class Address extends Model
         'complement',
     ];
 
+    protected $appends = ['address'];
+
     public function address(): Attribute
     {
         return Attribute::make(

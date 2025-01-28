@@ -43,7 +43,8 @@ const handleOrderContinue = () => {
         return;
     }
 
-    console.log('vai pro checkout');
+    showCart.value = false;
+    router.visit('/checkout');
 };
 
 </script>

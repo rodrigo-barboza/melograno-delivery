@@ -1,7 +1,7 @@
 <template>
     <button
         class="w-full rounded-md border border-transparent bg-[#F34444] px-4 py-3 text-base font-light text-white transition duration-150 ease-in-out hover:bg-[#C13636] focus:bg-[#C13636] focus:outline-none"
-        :class="{ 'cursor-not-allowed bg-[#EFADAD] hover:bg-[#EFADAD]': $attrs.loading }"
+        :class="{ 'loading': $attrs.loading }"
         :disabled="$attrs.loading"
     >
         <div
@@ -21,3 +21,18 @@
         <slot v-else />
     </button>
 </template>
+
+<style scoped>
+button.loading {
+    cursor: not-allowed;
+    background-color: #EFADAD;
+}
+
+button.loading:hover {
+    background-color: #EFADAD;
+}
+
+button:not(.loading):hover {
+    background-color: #C13636;
+}
+</style>
