@@ -19,7 +19,7 @@ export default () => {
         return await Promise.all(
             getEstablishments(cartItems).map(async (establishment) => {
                 const dishes = getEstablishmentDishes(establishment.id, cartItems)
-                    .map(({ dish, quantity }) => ({ quantity, dish }));
+                    .map(({ dish, quantity, comment }) => ({ dish, quantity, comment }));
 
                 return {
                     ...form,

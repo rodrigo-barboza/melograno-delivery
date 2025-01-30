@@ -11,7 +11,7 @@ class StoreCartRequest extends FormRequest
         return [
             'dish_id' => ['required', 'exists:dishes,id'],
             'quantity' => ['required', 'integer', 'min:1'],
-            'comments' => ['nullable', 'string'],
+            'comment' => ['nullable', 'string'],
         ];
     }
 }

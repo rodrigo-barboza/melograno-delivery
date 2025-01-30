@@ -6,6 +6,8 @@ import useCurrency from '@/Composables/useCurrency';
 
 const { toCurrency } = useCurrency();
 
+const emit = defineEmits(['handle-offline-payment', 'handle-online-payment']);
+
 const props = defineProps({
     cartItems: {
         type: Array,
@@ -29,22 +31,15 @@ const props = defineProps({
     },
 });
 
-const totalPriceProducts = computed(() => props.cartItems
-    .reduce((total, cartItem) => total + (cartItem.dish.price * cartItem.quantity), 0)
-);
+const totalPriceProducts = computed(() => props.cartItems.reduce(
+    (total, cartItem) => total + (cartItem.dish.price * cartItem.quantity), 0
+));
 
 const totalPrice = computed(() => totalPriceProducts.value + props.deliveryTax);
 const isDelivery = computed(() => props.deliveryTax > 0);
 const isOnlinePayment = computed(() => props.paymentType === 'online');
 
-const handleOrderContinue = () => {
-    if (isOnlinePayment.value) {
-        console.log('Online payment');
-        return;
-    }
-
-    console.log('Offline payment');
-};
+const handleOrderContinue = () => (isOnlinePayment.value ? emit('handle-online-payment') : emit('handle-offline-payment'));
 
 </script>
 

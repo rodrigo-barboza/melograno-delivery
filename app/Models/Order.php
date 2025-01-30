@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Traits\CalculateTotalPrice;
+use App\Models\Traits\GeneratesOrderNumber;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Order extends Model
+{
+    use GeneratesOrderNumber;
+    use CalculateTotalPrice;
+
+    protected $fillable = [
+        'user_id',
+        'establishment_id',
+        'payment_type',
+        'delivery_type',
+        'status',
+        'instructions',
+        'number',
+        'address',
+        'cancelation_reason',
+        'total',
+        'delivery_tax',
+        'total_items',
+        'rate',
+        'items',
+    ];
+
+    protected $casts = ['items' => 'array'];
+
+    public function total(): Attribute
+    {
+        return Attribute::make(
+            set: fn (): int => ($this->total_items + $this->delivery_tax) * 100,
+            get: fn (int $value): int => $value / 100,
+        );
+    }
+
+    public function deliveryTax(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int|null $value): int|null => $value ? $value / 100 : null,
+            set: fn (int|null $value): int|null => $value ? $value * 100 : null,
+        );
+    }
+
+    public function totalItems(): Attribute
+    {
+        return Attribute::make(
+            get: fn (int $value): int => $value / 100,
+            set: fn (int $value): int => $value * 100,
+        );
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function establishment(): BelongsTo
+    {
+        return $this->belongsTo(Establishment::class);
+    }
+}

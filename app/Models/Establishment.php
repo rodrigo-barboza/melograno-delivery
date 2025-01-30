@@ -49,4 +49,9 @@ class Establishment extends Model
     {
         return $this->hasMany(Dish::class);
     }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

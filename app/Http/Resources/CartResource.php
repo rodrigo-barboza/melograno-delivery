@@ -13,6 +13,7 @@ class CartResource extends JsonResource
             'id' => $this->id,
             'dish' => $this->whenLoaded('dish', $this->dish),
             'quantity' => $this->quantity,
+            'comment' => $this->comment,
         ];
     }
 }

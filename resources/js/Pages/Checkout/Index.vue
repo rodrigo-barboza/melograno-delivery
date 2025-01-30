@@ -1,9 +1,13 @@
 <script setup>
 import { computed, ref } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
+import axios from 'axios';
 import CheckoutForm from '@/Pages/Checkout/Partials/CheckoutForm.vue';
 import GuestLightLayout from '@/Layouts/GuestLightLayout.vue';
 import ResumeCheckout from '@/Pages/Checkout/Partials/ResumeCheckout.vue';
+import useToast from '@/Composables/useToast';
+
+const toast = useToast();
 
 defineProps({
     cartItems: {
@@ -17,6 +21,17 @@ const orders = ref([]);
 const loading = ref(false);
 const deliveryTax = computed(() => orders.value.reduce((total, order) => total + order.delivery_tax, 0));
 const paymentType = computed(() => orders.value[0]?.payment_type);
+
+const onOfflinePayment = async () => {
+    try {
+        await axios.post('/checkout/new-order', { orders: orders.value });
+        toast.success('Pedido realizado com sucesso');
+        setTimeout(() => router.visit('/'), 500);
+    } catch (error) {
+        console.error(error);
+        toast.error('Ocorreu um erro ao realizar o pedido');
+    }
+};
 
 </script>
 
@@ -34,6 +49,8 @@ const paymentType = computed(() => orders.value[0]?.payment_type);
                 :delivery-tax="deliveryTax"
                 :payment-type="paymentType"
                 :loading="loading"
+                @handle-online-payment="console.log('online payment')"
+                @handle-offline-payment="onOfflinePayment"
             />
         </div>
     </GuestLightLayout>
