@@ -10,7 +10,7 @@ trait TitleableName
     public function name(): Attribute
     {
         return new Attribute(
-            get: fn(string $title): string => Str::title($title)
+            get: fn (string $title): string => Str::title($title)
         );
     }
 }

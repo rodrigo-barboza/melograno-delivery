@@ -15,9 +15,7 @@ class NewOrderWasCreated implements ShouldBroadcast
 
     public function __construct(
         protected Order $order,
-    )
-    {
-    }
+    ) {}
 
     public function broadcastWith(): array
     {

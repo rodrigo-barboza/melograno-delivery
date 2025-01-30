@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Services\Socialite\SocialiteDriver;
-use App\Http\Services\Socialite\SocialiteService;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 

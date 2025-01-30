@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
-    use GeneratesOrderNumber;
     use CalculateTotalPrice;
+    use GeneratesOrderNumber;
 
     protected $fillable = [
         'user_id',
@@ -35,16 +35,16 @@ class Order extends Model
     public function total(): Attribute
     {
         return Attribute::make(
-            set: fn (): int => ($this->total_items + $this->delivery_tax) * 100,
             get: fn (int $value): int => $value / 100,
+            set: fn (int $value): int => $value * 100,
         );
     }
 
     public function deliveryTax(): Attribute
     {
         return Attribute::make(
-            get: fn (int|null $value): int|null => $value ? $value / 100 : null,
-            set: fn (int|null $value): int|null => $value ? $value * 100 : null,
+            get: fn (?int $value): ?int => $value ? $value / 100 : null,
+            set: fn (?int $value): ?int => $value ? $value * 100 : null,
         );
     }
 

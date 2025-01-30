@@ -12,11 +12,11 @@ class EstablishmentCategorySeeder extends Seeder
         DB::table('establishment_categories')->insert([
             [
                 'name' => 'restaurante',
-                'slug'=> 'restaurant',
+                'slug' => 'restaurant',
             ],
             [
-                'name'=> 'bar',
-                'slug'=> 'bar',
+                'name' => 'bar',
+                'slug' => 'bar',
             ],
             [
                 'name' => 'pizzaria',

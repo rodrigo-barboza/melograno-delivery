@@ -12,7 +12,7 @@ class CheckoutController extends Controller
     {
         return Inertia::render('Checkout/Index', [
             'cartItems' => CartResource::collection(
-                Cart::with(['dish' => fn($query) => $query->with('establishment')])->get()
+                Cart::with(['dish' => fn ($query) => $query->with('establishment')])->get()
             ),
         ]);
     }

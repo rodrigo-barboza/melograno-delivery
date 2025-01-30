@@ -14,11 +14,11 @@ class CategoryCollection extends ResourceCollection
     public function toArray(Request $request): Collection
     {
         return $this->collection->transform(
-            fn(Category $category): array => [
-                'id'=> $category->id,
-                'name'=> $category->name,
-                'slug'=> $category->slug,
-                'cover'=> $category->cover,
+            fn (Category $category): array => [
+                'id' => $category->id,
+                'name' => $category->name,
+                'slug' => $category->slug,
+                'cover' => $category->cover,
             ]
         );
     }

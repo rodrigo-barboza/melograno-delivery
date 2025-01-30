@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Establishment extends Model
 {
-    use TitleableName, HasFactory;
+    use HasFactory, TitleableName;
 
     public $timestamps = false;
 
@@ -21,7 +21,7 @@ class Establishment extends Model
     {
         return Attribute::make(
             get: fn ($value): float|int => $value / 100,
-            set: fn ($value): float|int => $value *100,
+            set: fn ($value): float|int => $value * 100,
         );
     }
 

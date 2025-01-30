@@ -11,9 +11,7 @@ class SocialUser implements Arrayable
         public readonly string $cover,
         public readonly string $email,
         public readonly string $provider,
-    )
-    {
-    }
+    ) {}
 
     public function toArray(): array
     {

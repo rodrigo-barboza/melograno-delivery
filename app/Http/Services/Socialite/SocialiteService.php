@@ -10,7 +10,7 @@ class SocialiteService
             throw new \InvalidArgumentException('Provider does not exist in this application.');
         }
 
-        $class_name = 'App\\Http\\Services\\Socialite\\' . str($provider)->studly() . 'Driver';
+        $class_name = 'App\\Http\\Services\\Socialite\\'.str($provider)->studly().'Driver';
 
         if (! class_exists($class_name)) {
             throw new \InvalidArgumentException("Driver class {$class_name} not found.");

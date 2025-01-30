@@ -20,7 +20,7 @@ class DishFactory extends Factory
 
         $drinks = [
             asset('/images/coca.webp'),
-            asset('/images/heineken.webp')
+            asset('/images/heineken.webp'),
         ];
 
         $category = $this->getUniqueCategory();

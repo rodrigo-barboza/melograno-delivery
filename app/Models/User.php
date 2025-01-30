@@ -40,9 +40,9 @@ class User extends Authenticatable
     protected function cover(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value): string => $value,
-            set: fn(string $value): string => $value
-                ?: 'https://avatar.oxro.io/avatar.svg?name='. ucwords($this->name),
+            get: fn (string $value): string => $value,
+            set: fn (string $value): string => $value
+                ?: 'https://avatar.oxro.io/avatar.svg?name='.ucwords($this->name),
         );
     }
 

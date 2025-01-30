@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\DishesCategoriesEnum;
-use App\Http\Resources\EstablishmentCollection;
 use App\Http\Resources\EstablishmentResource;
 use App\Models\Establishment;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -22,8 +20,8 @@ class EstablishmentController extends Controller
     public function show(Establishment $establishment): Response
     {
         $establishment->load([
-            'operatingHour' => fn($query) => $query->orderBy('day_of_week'),
-            'dishes' => fn($query) => $query->with('category'),
+            'operatingHour' => fn ($query) => $query->orderBy('day_of_week'),
+            'dishes' => fn ($query) => $query->with('category'),
             'categories',
         ]);
 

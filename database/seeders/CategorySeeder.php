@@ -12,12 +12,12 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             [
                 'name' => 'chinesas',
-                'slug'=> 'chinese',
+                'slug' => 'chinese',
                 'cover' => asset('images/culinaria-chinesa.jpg'),
             ],
             [
-                'name'=> 'brasileiras',
-                'slug'=> 'brazilian',
+                'name' => 'brasileiras',
+                'slug' => 'brazilian',
                 'cover' => asset('images/comida-brasileira.jpg'),
             ],
             [
@@ -36,28 +36,28 @@ class CategorySeeder extends Seeder
                 'cover' => asset('images/doces-bolos.png'),
             ],
             [
-                'name'=> 'salgados',
-                'slug'=> 'salty',
+                'name' => 'salgados',
+                'slug' => 'salty',
                 'cover' => asset('images/salgados.jpg'),
             ],
             [
                 'name' => 'sorvetes',
-                'slug'=> 'ice-creams',
+                'slug' => 'ice-creams',
                 'cover' => asset('images/sorvetes.jpg'),
             ],
             [
-                'name'=> 'japonesa',
-                'slug'=> 'japanese',
+                'name' => 'japonesa',
+                'slug' => 'japanese',
                 'cover' => asset('images/culinaria-japonesa.jpg'),
             ],
             [
-                'name'=> 'saudável',
-                'slug'=> 'healthy',
+                'name' => 'saudável',
+                'slug' => 'healthy',
                 'cover' => asset('images/saudavel.jpg'),
             ],
             [
-                'name'=> 'bebidas',
-                'slug'=> 'drinks',
+                'name' => 'bebidas',
+                'slug' => 'drinks',
                 'cover' => asset('images/bebidas.webp'),
             ],
         ]);

@@ -34,7 +34,7 @@ class CartController extends Controller
         $cart->update($request->validated());
 
         return response()->json([
-            'message'=> 'Produto atualizado no carrinho',
+            'message' => 'Produto atualizado no carrinho',
         ], Response::HTTP_ACCEPTED);
     }
 

@@ -17,7 +17,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'cover' => 'https://avatar.oxro.io/avatar.svg?name='. fake()->name(),
+            'cover' => 'https://avatar.oxro.io/avatar.svg?name='.fake()->name(),
             'remember_token' => Str::random(10),
             'establishment_id' => null,
             'provider' => null,

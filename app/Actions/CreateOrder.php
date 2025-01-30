@@ -12,8 +12,8 @@ class CreateOrder
 {
     public function handle(Order $order, array $attributes): void
     {
-        DB::transaction(function() use ($order, $attributes): void {
-            foreach($attributes as $establishment_order) {
+        DB::transaction(function () use ($order, $attributes): void {
+            foreach ($attributes as $establishment_order) {
                 $new_order = $order->create([
                     ...$establishment_order,
                     'user_id' => Auth::user()->id,
@@ -30,7 +30,7 @@ class CreateOrder
 
     private function calculateTotalItemsPrice(array $items): int
     {
-        return array_reduce($items, function($carry, $item): float|int {
+        return array_reduce($items, function ($carry, $item): float|int {
             return $carry + $item['quantity'] * $item['dish']['price'];
         }, 0);
     }

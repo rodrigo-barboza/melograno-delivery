@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Enums;
+
 enum DishesCategoriesEnum: string
 {
     case CHINESE = 'chinese';

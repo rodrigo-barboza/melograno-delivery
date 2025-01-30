@@ -17,7 +17,7 @@ class ShippingTaxController extends Controller
 
         if (! $distance) {
             return response()->json([
-                'error' => 'Unable to calculate distance'
+                'error' => 'Unable to calculate distance',
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 

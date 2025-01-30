@@ -16,7 +16,7 @@ class StoreOrderRequest extends FormRequest
             'orders.*.address' => ['required', 'string'],
             'orders.*.delivery_tax' => ['nullable', 'numeric'],
             'orders.*.delivery_type' => ['required', 'string', Rule::in(values: DeliveryTypeEnum::values())],
-            'orders.*.payment_type' => ['required', 'string', Rule::in(values:PaymentTypeEnum::values())],
+            'orders.*.payment_type' => ['required', 'string', Rule::in(values: PaymentTypeEnum::values())],
             'orders.*.establishment_id' => ['required', 'numeric', 'exists:establishments,id'],
             'orders.*.instructions' => ['nullable', 'string'],
             'orders.*.items' => ['required', 'array'],
