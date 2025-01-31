@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class CreateOrder
 {
-    public function handle(Order $order, array $attributes): void
+    public function handle(Order $order, array $attributes, bool $dispatchable = true): array
     {
-        DB::transaction(function () use ($order, $attributes): void {
+        $orders = [];
+
+        DB::transaction(function () use ($order, $attributes, $dispatchable, &$orders): void {
             foreach ($attributes as $establishment_order) {
                 $new_order = $order->create([
                     ...$establishment_order,
@@ -21,11 +23,15 @@ class CreateOrder
                     'total_items' => $this->calculateTotalItemsPrice($establishment_order['items']),
                 ]);
 
-                NewOrderWasCreated::dispatch($new_order, now());
+                $orders[] = $new_order;
+
+                NewOrderWasCreated::dispatchIf($dispatchable, $new_order);
             }
 
             request()->user()->carts()->delete();
         });
+
+        return $orders;
     }
 
     private function calculateTotalItemsPrice(array $items): int

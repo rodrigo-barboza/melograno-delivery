@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { Head, router } from '@inertiajs/vue3';
 import axios from 'axios';
 import CheckoutForm from '@/Pages/Checkout/Partials/CheckoutForm.vue';
@@ -9,7 +9,7 @@ import useToast from '@/Composables/useToast';
 
 const toast = useToast();
 
-defineProps({
+const props = defineProps({
     cartItems: {
         type: Array,
         default: () => ([]),
@@ -33,6 +33,11 @@ const onOfflinePayment = async () => {
     }
 };
 
+const onOnlinePayment = async () => {
+    const { data: { url } } = await axios.post('/checkout/stripe-new-order', { orders: orders.value });
+    window.location.href = url;
+};
+
 </script>
 
 <template>
@@ -49,7 +54,7 @@ const onOfflinePayment = async () => {
                 :delivery-tax="deliveryTax"
                 :payment-type="paymentType"
                 :loading="loading"
-                @handle-online-payment="console.log('online payment')"
+                @handle-online-payment="onOnlinePayment"
                 @handle-offline-payment="onOfflinePayment"
             />
         </div>

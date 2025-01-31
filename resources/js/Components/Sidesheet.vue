@@ -23,7 +23,7 @@
             <span class="sr-only">Close menu</span>
         </button>
         <div class="flex flex-col justify-between mt-6 mb-6 text-sm text-gray-500 h-[93%]">
-            <div class="h-full">
+            <div class="h-[75%]">
                 <slot />
             </div>
             <div>

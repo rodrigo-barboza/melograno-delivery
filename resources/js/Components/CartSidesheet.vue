@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { router } from '@inertiajs/vue3';
 import CartItem from '@/Components/CartItem.vue';
 import EmptyState from '@/Components/EmptyState.vue';

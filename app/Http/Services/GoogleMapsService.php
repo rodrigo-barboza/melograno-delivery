@@ -10,13 +10,11 @@ class GoogleMapsService
 
     public function get(string $origin, string $destination): self
     {
-        $response = Http::get(config('services.google-maps.path'), [
+        $this->response = Http::get(config('services.google-maps.path'), [
             'origins' => $origin,
             'destinations' => $destination,
             'key' => config('services.google-maps.key'),
-        ]);
-
-        $this->response = $response->json();
+        ])->json();
 
         return $this;
     }

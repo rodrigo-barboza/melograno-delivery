@@ -30,7 +30,7 @@ const form = ref({
 
 const radioOptions = [
     { label: 'Retirada', value: 'pickup' },
-    { label: 'Online', value: 'online' },
+    { label: 'Online', value: 'delivery' },
 ];
 
 const deliveryOptions = [

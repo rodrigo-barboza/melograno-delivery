@@ -9,10 +9,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleDriver implements SocialiteDriver
 {
-    public SocialiteService $socialite {
-        get => new SocialiteService();
-    }
-
     public function getDriver(): string
     {
         return SocialDriverEnum::GOOGLE->value;

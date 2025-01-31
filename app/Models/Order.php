@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentStatusEnum;
+use App\Models\Scopes\UserScope;
 use App\Models\Traits\CalculateTotalPrice;
 use App\Models\Traits\GeneratesOrderNumber;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[ScopedBy([UserScope::class])]
 class Order extends Model
 {
     use CalculateTotalPrice;
@@ -28,6 +33,8 @@ class Order extends Model
         'total_items',
         'rate',
         'items',
+        'session_id',
+        'payment_status',
     ];
 
     protected $casts = ['items' => 'array'];
@@ -64,5 +71,16 @@ class Order extends Model
     public function establishment(): BelongsTo
     {
         return $this->belongsTo(Establishment::class);
+    }
+
+    public function scopeUnpaid(Builder $query): void
+    {
+        $query->where('payment_status', PaymentStatusEnum::UNPAID->value);
+    }
+
+    public function markAsPaid(): void
+    {
+        $this->payment_status = PaymentStatusEnum::PAID->value;
+        $this->save();
     }
 }

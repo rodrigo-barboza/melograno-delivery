@@ -37,7 +37,7 @@ const totalPriceProducts = computed(() => props.cartItems.reduce(
 
 const totalPrice = computed(() => totalPriceProducts.value + props.deliveryTax);
 const isDelivery = computed(() => props.deliveryTax > 0);
-const isOnlinePayment = computed(() => props.paymentType === 'online');
+const isOnlinePayment = computed(() => props.paymentType === 'delivery');
 
 const handleOrderContinue = () => (isOnlinePayment.value ? emit('handle-online-payment') : emit('handle-offline-payment'));
 
