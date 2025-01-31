@@ -13,8 +13,8 @@ use Illuminate\Http\JsonResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CheckoutController extends Controller
 {
@@ -38,11 +38,10 @@ class CheckoutController extends Controller
         Order $order,
         CreateOrder $action,
         StripeService $service,
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $orders = $action->handle($order, $request->validated('orders'), dispatchable: false);
 
-        return response()->json(['url' => $service->createSession($orders)->url ]);
+        return response()->json(['url' => $service->createSession($orders)->url]);
     }
 
     public function success(StripeService $service, MarkOrdersAsPaid $action): Response

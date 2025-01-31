@@ -16,6 +16,7 @@ use UnexpectedValueException;
 final class StripeService
 {
     private StripeClient $stripe;
+
     private Session $session;
 
     public function __construct()
@@ -24,15 +25,14 @@ final class StripeService
     }
 
     /**
-     * @param array<int,\App\Models\Order> $orders
-     * @return Session
+     * @param  array<int,\App\Models\Order>  $orders
      */
     public function createSession(array $orders): Session
     {
         $this->session = $this->stripe->checkout->sessions->create([
             'line_items' => $this->makeItems($orders),
             'mode' => 'payment',
-            'success_url' => route('checkout.success', [], true) . '?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => route('checkout.success', [], true).'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout.cancel', [], true),
         ]);
 
@@ -46,6 +46,7 @@ final class StripeService
         try {
             $session = $this->stripe->checkout->sessions->retrieve($session_id);
             throw_if(! $session, NotFoundHttpException::class);
+
             return $session;
         } catch (ApiErrorException $e) {
             throw new NotFoundHttpException($e->getMessage());
@@ -81,7 +82,7 @@ final class StripeService
                         'product_data' => [
                             'name' => 'Entrega',
                         ],
-                        'unit_amount' => (int)($order->delivery_tax * 100),
+                        'unit_amount' => (int) ($order->delivery_tax * 100),
                     ],
                     'quantity' => 1,
                 ];

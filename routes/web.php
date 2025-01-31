@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function (): void {
         Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index');
         Route::get('/shipping-cost', [ShippingTaxController::class, 'calculate'])->name('checkout.shipping-cost');
         Route::post('/new-order', [OrderController::class, 'store'])->name('orders.store');
-        Route::post('/stripe-new-order', [CheckoutController::class,'checkout'])->name('checkout.stripe-new-order');
-        Route::get('/success', [CheckoutController::class,'success'])->name('checkout.success');
+        Route::post('/stripe-new-order', [CheckoutController::class, 'checkout'])->name('checkout.stripe-new-order');
+        Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
         Route::get('/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
         Route::post('/webhook', [CheckoutController::class, 'webhook'])
             ->withoutMiddleware(VerifyCsrfToken::class)

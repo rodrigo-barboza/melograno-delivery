@@ -14,7 +14,7 @@ final class OrderController
     public function index(): InertiaResponse
     {
         return Inertia::render('Orders/Index', [
-            'orders' => Order::query()->orderBy('id','desc')->paginate(20),
+            'orders' => Order::query()->orderBy('id', 'desc')->paginate(20),
         ]);
     }
 
