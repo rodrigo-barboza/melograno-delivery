@@ -1,7 +1,8 @@
 <script setup>
+import { router } from '@inertiajs/vue3';
+import { SwiperSlide } from 'swiper/vue';
 import CategoryCard from '@/Components/CategoryCard.vue';
 import Swiper from '@/Components/Swiper.vue';
-import { SwiperSlide } from 'swiper/vue';
 
 defineProps({
     categories: {
@@ -10,6 +11,7 @@ defineProps({
     },
 });
 
+const redirectToCategory = (slug) => router.visit(route('categories.index', { slug_category: slug }));
 </script>
 
 <template>
@@ -23,7 +25,7 @@ defineProps({
                     :id="id"
                     :name="name"
                     :image="cover"
-                    @on-click="console.log(slug)"
+                    @on-click="redirectToCategory(slug)"
                 />
             </SwiperSlide>
         </Swiper>

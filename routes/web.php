@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::get('/establishments/category/{slug_category}', [EstablishmentController::class, 'byCategory'])->name('establishments.by-category');
 Route::resource('establishments', EstablishmentController::class)->only(['index', 'show']);
 
-Route::get('categories/{categories:slug}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/{slug_category}', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::middleware('auth')->group(function (): void {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

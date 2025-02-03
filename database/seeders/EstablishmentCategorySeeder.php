@@ -24,11 +24,11 @@ class EstablishmentCategorySeeder extends Seeder
             ],
             [
                 'name' => 'lanchonete',
-                'slug' => 'snack_bar',
+                'slug' => 'snack-bar',
             ],
             [
                 'name' => 'hamburgueria',
-                'slug' => 'burger_joint',
+                'slug' => 'burger-joint',
             ],
         ]);
     }

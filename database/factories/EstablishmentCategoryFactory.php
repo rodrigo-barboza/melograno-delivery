@@ -8,9 +8,32 @@ class EstablishmentCategoryFactory extends Factory
 {
     public function definition(): array
     {
+        $category = $this->faker->randomElement([
+            [
+                'name' => 'restaurante',
+                'slug' => 'restaurant',
+            ],
+            [
+                'name' => 'bar',
+                'slug' => 'bar',
+            ],
+            [
+                'name' => 'pizzaria',
+                'slug' => 'pizzeria',
+            ],
+            [
+                'name' => 'lanchonete',
+                'slug' => 'snack-bar',
+            ],
+            [
+                'name' => 'hamburgueria',
+                'slug' => 'burger-joint',
+            ],
+        ]);
+
         return [
-            'name' => $this->faker->randomElement(['restaurante', 'bar', 'pizzaria', 'lanchonete', 'hamburgueria']),
-            'slug' => $this->faker->randomElement(['restaurant', 'bar', 'pizzeria', 'snack_bar', 'burger_joint']),
+            'name' => $category['name'],
+            'slug' => $category['slug'],
         ];
     }
 }

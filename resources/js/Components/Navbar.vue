@@ -65,11 +65,38 @@ onMounted(() => {
                     </li>
                     <li>
                         <Link
-                            :href="route('establishments.index')"
+                            :href="route('establishments.by-category', { 'slug_category': 'restaurant'})"
                             class="block py-2 px-3 rounded md:bg-transparent md:p-0 hover:text-[#F34444]"
-                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments.index') }"
+                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments.by-category', {'slug_category': 'restaurant'}) }"
                         >
                             Restaurantes
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            :href="route('establishments.by-category', {'slug_category': 'pizzeria'})"
+                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 hover:text-[#F34444]"
+                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments.by-category', {'slug_category': 'pizzeria'}) }"
+                        >
+                            Pizzarias
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            :href="route('establishments.by-category', {'slug_category': 'snack-bar'})"
+                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 hover:text-[#F34444]"
+                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments.by-category', {'slug_category': 'snack-bar'}) }"
+                        >
+                            Lanchonetes
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            :href="route('establishments.by-category', {'slug_category': 'bar'})"
+                            class="block py-2 px-3 rounded md:bg-transparent md:p-0 hover:text-[#F34444]"
+                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments.by-category', {'slug_category': 'bar'}) }"
+                        >
+                            Bares
                         </Link>
                     </li>
                 </ul>
