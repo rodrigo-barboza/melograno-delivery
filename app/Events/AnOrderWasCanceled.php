@@ -27,6 +27,6 @@ class AnOrderWasCanceled implements ShouldBroadcast
 
     public function broadcastOn(): PrivateChannel
     {
-        return new PrivateChannel('order-cancel' . $this->order->establishment_id);
+        return new PrivateChannel('order-cancel'.$this->order->establishment_id);
     }
 }

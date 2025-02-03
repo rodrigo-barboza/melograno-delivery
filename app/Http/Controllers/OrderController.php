@@ -24,7 +24,7 @@ final class OrderController
                 ->take($per_page)
                 ->orderBy('created_at', 'desc')
                 ->get()
-                ->groupBy(fn(Order $order) => $order->created_at->format('Y-m-d')),
+                ->groupBy(fn (Order $order) => $order->created_at->format('Y-m-d')),
             'pagination' => [
                 'total' => $total_orders = Order::query()->count(),
                 'current_page' => $current_page,

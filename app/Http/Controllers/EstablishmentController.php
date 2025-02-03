@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\EstablishmentResource;
 use App\Models\Establishment;
-use App\Models\EstablishmentCategory;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -23,7 +21,7 @@ class EstablishmentController extends Controller
     {
         return Inertia::render('Establishment/Index', [
             'establishments' => EstablishmentResource::collection(
-                Establishment::whereHas('categories', fn($q) => $q->where('slug', $slug_category))
+                Establishment::whereHas('categories', fn ($q) => $q->where('slug', $slug_category))
                     ->with('categories')
                     ->get(),
             ),

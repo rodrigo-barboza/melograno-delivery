@@ -4,7 +4,6 @@ namespace App\Actions;
 
 use App\Enums\OrderStatusEnum;
 use App\Events\AnOrderWasCanceled;
-use App\Events\NewOrderWasCreated;
 use App\Models\Order;
 use DomainException;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +19,7 @@ class CancelOrder
         DB::transaction(function () use ($order, $attributes): void {
             $order->update([
                 'status' => OrderStatusEnum::CANCELED->value,
-                'cancelation_reason' => $attributes['cancelation_reason']
+                'cancelation_reason' => $attributes['cancelation_reason'],
             ]);
 
             AnOrderWasCanceled::dispatch($order);

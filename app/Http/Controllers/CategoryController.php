@@ -14,7 +14,7 @@ class CategoryController extends Controller
         return Inertia::render('Categories/Index', [
             'dishes' => Dish::whereHas(
                 'category',
-                fn($query) => $query->where('slug', $slug_category)
+                fn ($query) => $query->where('slug', $slug_category)
             )->paginate(14),
             'category' => Category::where('slug', $slug_category)->first(),
         ]);
