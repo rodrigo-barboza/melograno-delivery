@@ -20,6 +20,11 @@ defineProps({
         type: String,
         default: 'mt-8',
     },
+
+    imageClass: {
+        type: String,
+        default: 'w-64 h-64',
+    },
 });
 
 </script>
@@ -28,7 +33,7 @@ defineProps({
     <div class="flex flex-col items-center justify-center">
         <img
             :src="imageSrc"
-            class="w-64 h-64"
+            :class="imageClass"
         />
         <div :class="`${marginTitle} text-center text-[#1E1E1E] text-base`">
             <div class="font-bold">{{ title }}</div>

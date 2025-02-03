@@ -167,6 +167,11 @@ onMounted(() => {
                         <template #content>
                             <template v-if="$page.props.auth.user">
                                 <DropdownLink
+                                    :href="route('orders.index')"
+                                >
+                                    Meus pedidos
+                                </DropdownLink>
+                                <DropdownLink
                                     :href="route('profile.edit')"
                                 >
                                     Perfil

@@ -22,4 +22,12 @@ enum OrderStatusEnum: string
             self::CANCELED->value,
         ];
     }
+
+    public static function cancelableStatus(): array
+    {
+        return [
+            self::WAINTING->value,
+            self::IN_PREPARATION->value,
+        ];
+    }
 }

@@ -15,6 +15,8 @@ class Establishment extends Model
 {
     use HasFactory, TitleableName;
 
+    protected $fillable = ['rate'];
+
     public $timestamps = false;
 
     public function minimumOrderValue(): Attribute

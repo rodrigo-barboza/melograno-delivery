@@ -17,6 +17,11 @@ class NewOrderWasCreated implements ShouldBroadcast
         protected Order $order,
     ) {}
 
+    public function broadcastAs(): string
+    {
+        return 'new-order.created';
+    }
+
     public function broadcastWith(): array
     {
         return ['message' => "Novo pedido criado, Nº {$this->order->id}"];

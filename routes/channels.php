@@ -12,3 +12,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('new-order.{establishment_id}', function (User $user, string $establishment_id): bool {
     return (int) $user->establishment_id === (int) $establishment_id;
 });
+
+Broadcast::channel('order-cancel.{establishment_id}', function (User $user, string $establishment_id): bool {
+    return (int) $user->establishment_id === (int) $establishment_id;
+});

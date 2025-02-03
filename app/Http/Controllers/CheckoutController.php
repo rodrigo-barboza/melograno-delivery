@@ -44,6 +44,13 @@ class CheckoutController extends Controller
         return response()->json(['url' => $service->createSession($orders)->url]);
     }
 
+    public function retrieveCheckout(Order $order, StripeService $service): JsonResponse
+    {
+        return response()->json([
+            'url' => $service->retrieveCheckoutSession($order->session_id)->url,
+        ]);
+    }
+
     public function success(StripeService $service, MarkOrdersAsPaid $action): Response
     {
         $customer = $service->retrieveCheckoutSession(request('session_id'))->customer_details;
