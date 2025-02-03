@@ -8,13 +8,14 @@ use App\Models\EstablishmentCategory;
 use App\Models\OperatingHour;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class EstablishmentFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            'name' => $this->faker->company,
+            'name' => Str::lower($this->faker->company),
             'business_registration' => $this->faker->numerify('###########'),
             'phone' => $this->faker->phoneNumber(),
             'cep' => $this->faker->postcode,

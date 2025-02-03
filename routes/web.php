@@ -8,6 +8,7 @@ use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchEstablishmentController;
 use App\Http\Controllers\ShippingTaxController;
 use App\Http\Controllers\UpdateEstablishmentRateController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -17,6 +18,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/establishments/category/{slug_category}', [EstablishmentController::class, 'byCategory'])->name('establishments.by-category');
 Route::resource('establishments', EstablishmentController::class)->only(['index', 'show']);
+Route::get('/search-establishments', SearchEstablishmentController::class)->name('search-establishments');
 
 Route::get('/categories/{slug_category}', [CategoryController::class, 'index'])->name('categories.index');
 
