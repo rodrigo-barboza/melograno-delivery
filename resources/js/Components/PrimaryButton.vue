@@ -1,11 +1,28 @@
+<script setup>
+defineProps({
+    loading: {
+        type: Boolean,
+        default: false
+    },
+    disabled: {
+        type: Boolean,
+        default: false
+    },
+    fluid: {
+        type: Boolean,
+        default: true
+    },
+})
+</script>
+
 <template>
     <button
-        class="w-full rounded-md border border-transparent bg-[#F34444] px-4 py-3 text-base font-light text-white transition duration-150 ease-in-out hover:bg-[#C13636] focus:bg-[#C13636] focus:outline-none"
-        :class="{ 'disabled': $attrs.loading || $attrs.disabled }"
-        :disabled="$attrs.loading || $attrs.disabled"
+        class="rounded-md border border-transparent bg-[#F34444] px-4 py-3 text-base font-light text-white transition duration-150 ease-in-out hover:bg-[#C13636] focus:bg-[#C13636] focus:outline-none"
+        :class="{ 'disabled': loading || disabled, 'w-full': fluid }"
+        :disabled="loading || disabled"
     >
         <div
-            v-if="$attrs.loading"
+            v-if="loading"
             class="flex items-center justify-center"
         >
             <svg

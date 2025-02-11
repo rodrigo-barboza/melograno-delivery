@@ -73,10 +73,10 @@ const form = defineModel({
 
         <div class="text-center mt-2 mb-20">
             <div class="mt-3 text-[#7E7E7E] text-base font-[400]">
-                Quer anunciar seus produtos? 
+                Quer anunciar seus produtos?
                 <Link
                     class="text-base text-[#F34444] hover:underline self-end mb-3"
-                    href="/register"
+                    href="/seller/register"
                 >
                     Seja um vendedor
                 </Link>

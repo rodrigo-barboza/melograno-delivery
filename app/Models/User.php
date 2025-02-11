@@ -65,4 +65,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function isSeller(): bool
+    {
+        return $this->establishment()->exists();
+    }
+
+    public function isConsumer(): bool
+    {
+        return !$this->establishment()->exists();
+    }
 }

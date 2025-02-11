@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RegisteredSellerController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\SocialSessionCallbackController;
 use App\Http\Controllers\Auth\VerifyEmailController;
@@ -17,10 +18,11 @@ Route::get('social/{provider}/login', AuthenticatedSocialSessionController::clas
 Route::get('social/{provider}/callback', SocialSessionCallbackController::class)->name('social.callback');
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::get('/seller/register', [RegisteredSellerController::class, 'create'])->name('seller-register.create');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('/seller/register', [RegisteredSellerController::class, 'store'])->name('seller-register.store');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

@@ -6,11 +6,15 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchEstablishmentController;
+use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\ShippingTaxController;
 use App\Http\Controllers\UpdateEstablishmentRateController;
+use App\Http\Middleware\EnsureConsumerUser;
+use App\Http\Middleware\EnsureSellerUser;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +26,7 @@ Route::get('/search-establishments', SearchEstablishmentController::class)->name
 
 Route::get('/categories/{slug_category}', [CategoryController::class, 'index'])->name('categories.index');
 
-Route::middleware('auth')->group(function (): void {
+Route::middleware(['auth', EnsureConsumerUser::class])->group(function (): void {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -48,5 +52,13 @@ Route::middleware('auth')->group(function (): void {
             ->name('checkout.webhook');
     });
 });
+
+Route::middleware(['auth', EnsureSellerUser::class])
+    ->prefix('seller')
+    ->name('seller.')
+    ->group(function (): void {
+        Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard');
+        Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+    });
 
 require __DIR__.'/auth.php';

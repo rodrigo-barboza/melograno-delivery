@@ -13,3 +13,4 @@ export const STATUS = {
     [COMPLETED]: { level: 4, label: 'Pedido finalizado', textColor: '#1E1E1E', icon: 'check', iconColor: '#50A773' },
     [CANCELED]: { level: 4, label: 'Pedido cancelado', textColor: '#F34444', icon: 'x', iconColor: '#F34444' },
 };
+

@@ -79,7 +79,7 @@ defineProps({
                 Quer anunciar seus produtos?
                 <Link
                     class="text-base text-[#F34444] hover:underline self-end mb-3"
-                    href="/register"
+                    href="/seller/register"
                 >
                     Seja um vendedor
                 </Link>

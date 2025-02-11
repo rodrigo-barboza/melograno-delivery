@@ -69,10 +69,12 @@ const fetchEstablishments = async () => {
                         </svg>
                     </div>
                     <input
+                        v-model="search"
                         type="text"
                         id="search-navbar"
-                        class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Search..."
+                        class="block w-full sm:w-[300px] p-2 ps-10 text-sm text-gray-900 border-none h-12 rounded-lg bg-[#F8F8F8] focus:ring-[#F34444] focus:border-[#F34444] placeholder:text-[#C5C5C5]"
+                        placeholder="Pesquisar estabelecimentos"
+                        autocomplete="off"
                     >
                 </div>
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
@@ -174,6 +176,7 @@ const fetchEstablishments = async () => {
                             id="search-navbar"
                             class="block w-full sm:w-[300px] p-2 ps-10 text-sm text-gray-900 border-none h-12 rounded-lg bg-[#F8F8F8] focus:ring-[#F34444] focus:border-[#F34444] placeholder:text-[#C5C5C5]"
                             placeholder="Pesquisar estabelecimentos"
+                            autocomplete="off"
                         >
                         <div
                             v-if="search"
@@ -275,7 +278,7 @@ const fetchEstablishments = async () => {
                                 <DropdownLink
                                     :href="route('login')"
                                 >
-                                    Entrar
+                                    Entrar/Cadastrar
                                 </DropdownLink>
                             </template>
                         </template>

@@ -33,6 +33,16 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+
+    noBorder: {
+        type: Boolean,
+        default: true,
+    },
+
+    customClass: {
+        type: String,
+        default: '',
+    },
 });
 
 const inputRef = ref(null);
@@ -82,7 +92,8 @@ watch(internalModel, (newValue) => {
         <input
             v-model="internalModel"
             ref="inputRef"
-            class="block w-full p-2 ps-10 text-sm text-gray-900 border-none h-12 rounded-lg bg-[#F8F8F8] focus:ring-[#F34444] focus:border-[#F34444] placeholder:text-[#C5C5C5]"
+            class="block w-full p-2 ps-10 text-sm text-gray-900 bg-[#F8F8F8] h-12 rounded-lg focus:ring-[#F34444] focus:border-[#F34444] placeholder:text-[#C5C5C5]"
+            :class="`${noBorder ? 'border-none' : '' } ${customClass}`"
             type="text"
             :placeholder="placeholder"
         >

@@ -11,7 +11,6 @@ class EstablishmentSeeder extends Seeder
     {
         Establishment::factory()
             ->count(50)
-            ->withResponsible()
             ->withCategory()
             ->withOperatingHours()
             ->withDishes(15)

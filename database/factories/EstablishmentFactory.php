@@ -31,14 +31,6 @@ class EstablishmentFactory extends Factory
         ];
     }
 
-    public function withResponsible(): Factory
-    {
-        return $this->afterCreating(function (Establishment $establishment): void {
-            $establishment->user->establishment_id = $establishment->id;
-            $establishment->user->save();
-        });
-    }
-
     public function withOperatingHours(): Factory
     {
         return $this->afterCreating(function (Establishment $establishment): void {
