@@ -25,6 +25,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'cover' => '',
             'password' => bcrypt($request->password),
+            'role' => 'consumer',
         ]);
 
         event(new Registered($user));

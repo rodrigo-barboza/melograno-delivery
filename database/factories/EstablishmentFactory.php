@@ -25,7 +25,7 @@ class EstablishmentFactory extends Factory
             'cover' => $this->faker->randomElement([asset('/images/placeholder-a.svg'), asset('/images/placeholder-b.svg')]),
             'minimum_order_value' => $this->faker->numberBetween(10, 100),
             'rate' => $this->faker->randomFloat(2, 0, 5),
-            'user_id' => User::factory()->create()->id,
+            'user_id' => User::factory()->seller()->create()->id,
             'delivery_average_time_min' => $this->faker->numberBetween(10, 30),
             'delivery_average_time_max' => $this->faker->numberBetween(30, 60),
         ];

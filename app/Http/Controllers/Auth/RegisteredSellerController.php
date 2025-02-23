@@ -32,6 +32,7 @@ class RegisteredSellerController
             'email' => $request->email,
             'cover' => '',
             'password' => bcrypt($request->password),
+            'role' => 'seller',
         ]);
 
         $user->establishment()->create([

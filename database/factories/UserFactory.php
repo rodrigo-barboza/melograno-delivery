@@ -21,13 +21,21 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'establishment_id' => null,
             'provider' => null,
+            'role' => 'consumer',
         ];
     }
 
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function seller(): self
+    {
+        return $this->state(fn (array $attributes): array => [
+            'role' => 'seller',
         ]);
     }
 }

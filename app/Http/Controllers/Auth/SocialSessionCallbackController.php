@@ -18,6 +18,7 @@ class SocialSessionCallbackController extends Controller
             $user = User::create([
                 ...$social_user->toArray(),
                 'password' => bcrypt(uniqid()),
+                'role' => 'consumer',
             ]);
         }
 
