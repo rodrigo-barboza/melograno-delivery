@@ -16,13 +16,16 @@ class Dish extends Model
     protected $fillable = [
         'name',
         'price',
+        'description',
+        'image',
+        'category_id',
     ];
 
     public function price(): Attribute
     {
         return Attribute::make(
             get: fn (int $value): int => $value / 100,
-            set: fn (int $value): int => $value * 100,
+            set: fn (int|float $value): int => $value * 100,
         );
     }
 

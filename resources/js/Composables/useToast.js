@@ -3,8 +3,8 @@ import { toast as toastService } from 'vue3-toastify';
 export default () => {
     const defaultOptions = {
         type: 'default',
-        style: 'z-index: 99999',
         dangerouslyHTMLString: true,
+        position: 'bottom-right',
     };
 
     const toast = {

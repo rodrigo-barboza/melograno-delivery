@@ -59,6 +59,7 @@ Route::middleware(['auth', EnsureSellerUser::class])
     ->group(function (): void {
         Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard');
         Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+        Route::post('/menu/new-dish', [MenuController::class, 'store'])->name('menu.store');
     });
 
 require __DIR__.'/auth.php';

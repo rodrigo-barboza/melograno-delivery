@@ -1,12 +1,21 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import DishesSection from '@/Pages/Seller/Menu/Partials/DishesSection.vue';
 import MenuHeader from '@/Pages/Seller/Menu/Partials/MenuHeader.vue';
 import NewDishModal from './Partials/NewDishModal.vue';
 import SellerLayout from '@/Layouts/SellerLayout.vue';
 
-defineProps({
+const props = defineProps({
+    dishes: {
+        type: Array,
+        required: true,
+    },
 
+    categories: {
+        type: Array,
+        required: true,
+    },
 });
 
 const openDishModal = ref(false);
@@ -18,7 +27,11 @@ const openDishModal = ref(false);
     <SellerLayout>
         <template #container>
             <MenuHeader @on-new-dish="openDishModal = true" />
-            <NewDishModal v-model="openDishModal" />
+            <DishesSection :dishes="dishes" />
+            <NewDishModal
+                v-model="openDishModal"
+                :categories="categories"
+            />
         </template>
     </SellerLayout>
 </template>

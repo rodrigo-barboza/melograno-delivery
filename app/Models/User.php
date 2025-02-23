@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\SocialDriverEnum;
+use App\Enums\UserRolesEnum;
 use App\Models\Traits\TitleableName;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'cover',
+        'role',
         'password',
         'provider',
     ];
@@ -68,11 +70,11 @@ class User extends Authenticatable
 
     public function isSeller(): bool
     {
-        return $this->establishment()->exists();
+        return $this->role === UserRolesEnum::SELLER->value;
     }
 
     public function isConsumer(): bool
     {
-        return !$this->establishment()->exists();
+        return $this->role === UserRolesEnum::CONSUMER->value;
     }
 }
