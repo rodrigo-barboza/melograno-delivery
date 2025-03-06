@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
     loading: {
         type: Boolean,
         default: false
@@ -12,13 +14,21 @@ defineProps({
         type: Boolean,
         default: true
     },
-})
+    size: {
+        type: String,
+        default: 'xs',
+        validate: (value) => ['xs', 'sm'].includes(value),
+    },
+});
+
+const resolveSize = computed(() => props.size === 'xs' ? 'px-4 py-3' : 'px-2 py-2');
+
 </script>
 
 <template>
     <button
-        class="rounded-md border border-transparent bg-[#F34444] px-4 py-3 text-base font-light text-white transition duration-150 ease-in-out hover:bg-[#C13636] focus:bg-[#C13636] focus:outline-none"
-        :class="{ 'disabled': loading || disabled, 'w-full': fluid }"
+        class="rounded-md border border-transparent bg-[#F34444] text-base font-light text-white transition duration-150 ease-in-out hover:bg-[#C13636] focus:bg-[#C13636] focus:outline-none"
+        :class="{ 'disabled': loading || disabled, 'w-full': fluid, [resolveSize]: true }"
         :disabled="loading || disabled"
     >
         <div

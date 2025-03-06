@@ -14,6 +14,10 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    isEdit: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const form = defineModel({
@@ -26,7 +30,14 @@ const imagePreview = ref(null);
 
 const categoriesOptions = computed(() => props.categories.map(({ id, name }) => ({ label: name, value: id })));
 
-watchEffect(() => imagePreview.value = form.value.image ? URL.createObjectURL(form.value.image) : null);
+watchEffect(() => {
+    if (form.value.image instanceof File) {
+        imagePreview.value = URL.createObjectURL(form.value.image);
+        return;
+    }
+
+    imagePreview.value = form.value.image ?? null;
+});
 
 </script>
 
@@ -124,7 +135,7 @@ watchEffect(() => imagePreview.value = form.value.image ? URL.createObjectURL(fo
                         :disabled="form.processing"
                         @click="emit('submit', unformattedPrice)"
                     >
-                        Adicionar
+                        {{ isEdit ? 'Atualizar' : 'Adicionar' }}
                     </PrimaryButton>
                 </div>
             </div>

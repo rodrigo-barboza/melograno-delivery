@@ -18,7 +18,7 @@ defineProps({
 </script>
 
 <template>
-    <span :class="`bg-${variant}-100 text-${variant}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm`">
+    <span :class="`bg-${variant}-100 text-${variant}-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded-sm`">
         {{ label }}
     </span>
 </template>

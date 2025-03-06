@@ -60,6 +60,8 @@ Route::middleware(['auth', EnsureSellerUser::class])
         Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard');
         Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
         Route::post('/menu/new-dish', [MenuController::class, 'store'])->name('menu.store');
+        Route::post('/menu/update/{dish}', [MenuController::class, 'update'])->name('menu.update');
+        Route::delete('/menu/destroy/{dish}', [MenuController::class, 'destroy'])->name('menu.destroy');
     });
 
 require __DIR__.'/auth.php';
