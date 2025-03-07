@@ -10,6 +10,10 @@ export default () => {
     const resolveEstablishmentDay = (operatingHour, day = null) => {
         const currentDay = day ?? today();
 
+        if (!operatingHour) {
+            return null;
+        }
+
         return operatingHour.find((item) => {
             return item.day_of_week === currentDay;
         });

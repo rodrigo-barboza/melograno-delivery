@@ -6,10 +6,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\Seller\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchEstablishmentController;
+use App\Http\Controllers\Seller\EstablishmentSettingsController;
 use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\ShippingTaxController;
 use App\Http\Controllers\UpdateEstablishmentRateController;
@@ -58,6 +59,8 @@ Route::middleware(['auth', EnsureSellerUser::class])
     ->name('seller.')
     ->group(function (): void {
         Route::get('/dashboard', [SellerController::class, 'index'])->name('dashboard');
+        Route::get('/settings', [EstablishmentSettingsController::class, 'index'])->name('settings');
+        Route::get('/settings/update-cover', [EstablishmentSettingsController::class, 'updateCover'])->name('settings.update-cover');
         Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
         Route::post('/menu/new-dish', [MenuController::class, 'store'])->name('menu.store');
         Route::post('/menu/update/{dish}', [MenuController::class, 'update'])->name('menu.update');

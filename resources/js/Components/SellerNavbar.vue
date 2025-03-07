@@ -60,9 +60,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
                     </li>
                     <li>
                         <Link
-                            :href="route('establishments.by-category', {'slug_category': 'pizzeria'})"
+                            :href="route('seller.settings')"
                             class="block py-2 px-3 rounded md:bg-transparent md:p-0 hover:text-[#F34444]"
-                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('establishments.by-category', {'slug_category': 'pizzeria'}) }"
+                            :class="{ 'text-white bg-[#F34444] md:text-[#F34444]': route().current('seller.settings') }"
                         >
                             Configurações
                         </Link>

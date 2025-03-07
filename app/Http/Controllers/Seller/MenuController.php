@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Seller;
 
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
